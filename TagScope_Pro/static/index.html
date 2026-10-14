@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1020">
+  <meta name="description" content="TagScope Disaster Intelligence helps track disaster news, review incident briefs, filter reports, analyze coverage signals, and compare reporting across publishers.">
+  <title>TagScope — Disaster Intelligence</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="TagScope home"><span class="brand-mark">#</span><span>TagScope</span><span class="brand-pro">PRO</span></a>
+    <nav class="top-nav" aria-label="Main navigation"><a href="#results-section">Incident reports</a><a href="#analytics-panel">Impact signals</a><a href="#comparison-panel">Compare reports</a></nav>
+    <div class="status-pill"><span class="status-dot"></span> Disaster intelligence</div>
+  </header>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> DISASTER AWARENESS & RESPONSE <span class="eyebrow-line"></span></div>
+      <h1>Track hazards.<br><span>Understand impact.</span></h1>
+      <p class="hero-copy">Monitor disaster-related reporting, build concise incident briefs, explore coverage signals, and compare reports across publishers to support situational awareness.</p>
+      <form id="search-form" class="search-form">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="query" name="q" type="search" placeholder="Search a hazard or incident: flood, cyclone, earthquake…" maxlength="180" autocomplete="off" required aria-label="Search topic">
+        <button id="search-button" type="submit"><span>Track incident</span><span aria-hidden="true">→</span></button>
+      </form>
+      <div class="try-row"><span>Quick incident searches</span><button class="topic-chip" data-query="India floods">India floods</button><button class="topic-chip" data-query="cyclone landfall">Cyclone landfall</button><button class="topic-chip" data-query="earthquake damage">Earthquake damage</button><button class="topic-chip" data-query="wildfire evacuation">Wildfire evacuation</button></div>
+      <div class="hero-foot"><span class="source-dot"></span> Disaster-related reporting from available news feeds · Not an official emergency alert service</div>
+    </section>
+
+    <section id="status-panel" class="status-panel" aria-live="polite">
+      <div class="empty-symbol">⌕</div><div class="section-kicker">DISASTER SITUATION WORKSPACE</div>
+      <h2>What is happening, where, and how is it being reported?</h2>
+      <p>Search a hazard or incident to create an incident brief, review reporting signals, refine reports, and compare coverage across publishers.</p>
+      <div class="feature-preview"><span><b>01</b> Incident brief</span><span><b>02</b> Coverage signals</span><span><b>03</b> Report comparison</span></div>
+    </section>
+
+    <section id="results-section" class="results-section hidden">
+      <div class="results-heading">
+        <div><div class="section-kicker">INCIDENT REPORT EXPLORER</div><h2 id="results-title">Incident coverage</h2><p id="results-subtitle" class="muted-copy">Disaster-related reports gathered across available news feeds.</p></div>
+        <div class="result-count-block"><span id="result-count" class="count-number">0</span><span class="count-caption">reports found</span></div>
+      </div>
+
+      <nav class="workspace-tabs" aria-label="Disaster management tools">
+        <button class="workspace-tab active" type="button" data-feature-tab="explore"><span>01</span> Incident reports</button>
+        <button class="workspace-tab" type="button" data-feature-tab="brief"><span>02</span> Incident brief</button>
+        <button class="workspace-tab" type="button" data-feature-tab="filters"><span>03</span> Report filters</button>
+        <button class="workspace-tab" type="button" data-feature-tab="analytics"><span>04</span> Coverage signals</button>
+        <button class="workspace-tab" type="button" data-feature-tab="compare"><span>05</span> Compare reports</button>
+      </nav>
+
+      <section class="feature-view" data-feature-panel="explore">
+        <div class="explore-intro"><div><div class="section-kicker">LATEST INCIDENT REPORTS</div><h3>Disaster-related reports</h3><p>Review source reports for hazard details, response activity, and recovery updates.</p></div><span class="live-indicator"><i></i> <span id="provider-label">News coverage</span></span></div>
+        <div class="article-grid" id="articles"></div>
+        <div id="no-filter-results" class="no-filter-results hidden"><strong>No incident reports match these filters.</strong><span>Open Report filters to adjust your selection.</span></div>
+        <p id="cache-note" class="cache-note"></p>
+      </section>
+
+      <section class="feature-view hidden" data-feature-panel="brief">
+        <div class="feature-page-heading"><div class="section-kicker">FEATURE 01 · SITUATION BRIEF</div><h3>Incident brief</h3><p>Review the main reported hazard, location clues, response actions, and developments found in the available headlines and descriptions.</p></div>
+        <div class="overview-card">
+          <div class="overview-icon">✳</div>
+          <div class="overview-content"><div class="overview-label">INCIDENT OVERVIEW <span class="subtle-badge">Built from available report text</span></div><p id="summary-text"></p><div class="key-points-wrap"><div class="mini-label">REPORTED DEVELOPMENTS</div><ul id="key-points" class="key-points"></ul></div><p class="overview-foot">This brief summarizes available news-feed text; it is not an official situation report. Verify urgent instructions and incident details with local authorities and emergency management agencies.</p></div>
+        </div>
+      </section>
+
+      <section class="feature-view hidden" data-feature-panel="filters">
+        <div class="feature-page-heading"><div class="section-kicker">FEATURE 02 · REPORT TRIAGE</div><h3>Filter incident reports</h3><p>Narrow reports by hazard type, publication date, publisher, and feed. Filters also update coverage signals and report comparison.</p></div>
+        <div class="filter-panel">
+          <div class="filter-heading"><span class="filter-icon">☷</span><div><strong>Refine incident reports</strong><small>Focus on the hazard and reporting window you need</small></div><button id="reset-filters" class="text-button" type="button">Reset filters</button></div>
+          <div class="filter-grid">
+            <label>Hazard / response type<select id="category-filter"><option value="all">All disaster categories</option><option>Floods</option><option>Cyclones &amp; storms</option><option>Earthquakes</option><option>Tsunamis</option><option>Volcanic eruptions</option><option>Industrial accidents</option><option>Wildfires</option><option>Landslides</option><option>Extreme heat</option><option>Drought</option><option>Emergency response</option><option>Relief &amp; recovery</option><option>Other disasters</option></select></label>
+            <label>Report date<select id="date-filter"><option value="all">Any time</option><option value="day">Past 24 hours</option><option value="week">Past 7 days</option><option value="month">Past 30 days</option></select></label>
+            <label>Publisher<select id="publisher-filter"><option value="all">All publishers</option></select></label>
+            <label>Reporting feed<select id="source-filter"><option value="all">All feeds</option><option value="Google News">Google News</option><option value="Bing News">Bing News</option></select></label>
+            <label>Sort by<select id="sort-filter"><option value="relevance">Most relevant</option><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
+          </div>
+        </div>
+        <div class="filter-result-summary"><span>Matching incident reports</span><strong id="filtered-count">0</strong><span id="filter-summary-copy">Filters apply to incident reports, coverage signals, and report comparison.</span><button class="primary-small" type="button" data-open-feature="explore">View matching reports →</button></div>
+      </section>
+
+      <section id="analytics-panel" class="feature-view hidden" data-feature-panel="analytics">
+        <div class="feature-page-heading"><div class="section-kicker">FEATURE 03 · SITUATIONAL AWARENESS</div><h3>Disaster coverage signals</h3><p>Review reporting volume, source spread, publication timing, and recurring hazard or response terms in the retrieved reports. These are media signals, not verified damage or casualty estimates.</p></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span>Matching incident reports</span><strong id="stat-articles">0</strong><small>After current filters</small></article>
+          <article class="stat-card"><span>Reporting publishers</span><strong id="stat-publishers">0</strong><small>Distinct publisher names</small></article>
+          <article class="stat-card"><span>News feeds</span><strong id="stat-feeds">0</strong><small>Feeds represented</small></article>
+          <article class="stat-card"><span>Latest publication</span><strong id="stat-latest">—</strong><small>Based on available dates</small></article>
+        </div>
+        <div class="analytics-grid">
+          <article class="analytics-card"><div class="analytics-title">Report publication timeline <span>▥</span></div><p class="analytics-subtitle">Retrieved disaster reports by publication date</p><div id="timeline-chart" class="timeline-chart"></div></article>
+          <article class="analytics-card"><div class="analytics-title">Recurring hazard &amp; response terms <span>⌗</span></div><p class="analytics-subtitle">Terms repeated across incident headlines and descriptions</p><div id="keyword-cloud" class="keyword-cloud"></div></article>
+        </div>
+      </section>
+
+      <section id="comparison-panel" class="feature-view hidden" data-feature-panel="compare">
+        <div class="feature-page-heading"><div class="section-kicker">FEATURE 04 · CROSS-SOURCE REVIEW</div><h3>Compare incident reports</h3><p>Review potentially related disaster reports from different publishers side by side. Similarity is estimated from headline wording; it does not verify facts or assess publisher bias.</p></div>
+        <div id="comparison-list" class="comparison-list"></div>
+      </section>
+
+    </section>
+    <footer><span class="footer-brand"><span class="brand-mark small">#</span> TagScope <span>· Disaster awareness & incident reporting</span></span><span>For emergencies, follow official local alerts and instructions. News coverage may be delayed or incomplete.</span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
